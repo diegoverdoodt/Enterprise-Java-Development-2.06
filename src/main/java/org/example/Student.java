@@ -7,17 +7,17 @@ public class Student {
     private String name;
     private int grade;
 
-    private Map<String, Student> studentMap = new HashMap<>();
+    private HashMap<String, Student> studentMap = new HashMap<>();
     public Student (String name, int grade){
         setName(name);
         setGrade(grade);
     }
 
-    public Map<String, Student> increase(Map<String, Student> a){
-        for (Student student : a.values()){
-            student.grade = (int) (grade * 1.1);
+    public HashMap increase(HashMap<String, Student> studends){
+        for (String key : studends.keySet()){
+            studends.get(key).setGrade(studends.get(key).getGrade() + studends.get(key).getGrade()/10);
         }
-        return a;
+        return studends;
     }
 
     public String getName() {
@@ -33,6 +33,10 @@ public class Student {
     }
 
     public void setGrade(int grade) {
-        this.grade = grade;
+        if (grade >= 0 && grade <= 100) {
+            this.grade = grade;
+        } else {
+            throw new IllegalArgumentException("El valor debe de estar entre 0 y 100");
+        }
     }
 }
